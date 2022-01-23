@@ -3,9 +3,15 @@
 
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useState } from 'react';
 import Header from "../components/header/Header";
+import Sidebar from '../components/sidebar/SideBar';
+import { StyledContainer, Main } from './App.styles';
+
 
 const Home: NextPage = () => {
+  const [search, setSearch] = useState('');
+
   return (
     <div>
       <Head>
@@ -15,6 +21,10 @@ const Home: NextPage = () => {
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" />
       </Head>
       <Header></Header>
+      <StyledContainer>
+        <Sidebar />
+        <Main />
+      </StyledContainer>
     </div>
   )
 }
