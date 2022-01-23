@@ -1,4 +1,5 @@
 import React, {FC} from 'react';
+import { StyledInput } from './Input.styles';
 
 interface InputProps {
   onChange(text: string): void;
@@ -7,8 +8,11 @@ interface InputProps {
 }
 
 const Input: FC<InputProps> = ({onChange, value, placeholder}) => {
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => onChange && onChange(event.target.value);
+
   return (
-    <input data-testid="input" />
+    <StyledInput data-testid="input" onChange={handleChange} value={value} placeholder={placeholder}/>
   )
 };
 
