@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import { BlogTitle, Paragraph, UserName, Wrapper } from './BlogItem.styles';
+import Comments from "../comments/Comments";
 
 interface BlogItemProps {
   post: PostResponse;
@@ -14,6 +15,7 @@ const BlogItem: FC<BlogItemProps> = ({post}) => {
       <BlogTitle>{title}</BlogTitle>
       <Paragraph>{body}</Paragraph>
       <hr />
+      <Comments comments={comments.data}/>
     </Wrapper>
   )
 }
