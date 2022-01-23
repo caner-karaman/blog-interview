@@ -8,9 +8,6 @@ import Header from "../components/header/Header";
 import Sidebar from '../components/sidebar/Sidebar';
 import BlogItem from '../components/blogItem/BlogItem';
 import { ItemWrapper, StyledContainer, Main, Articles } from './App.styles';
-import { createPosts } from '../types/mockData';
-
-const posts = createPosts();
 
 const POSTS_QUERY = gql`
   query POSTS_QUERY {
