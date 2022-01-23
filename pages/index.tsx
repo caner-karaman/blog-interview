@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/google-font-display */
 /* eslint-disable @next/next/no-page-custom-font */
+import React, {useEffect} from 'react';
 import type { NextPage } from 'next';
 import { gql } from 'graphql-tag';
 import { useQuery } from '@apollo/client';
@@ -8,25 +9,28 @@ import Header from "../components/header/Header";
 import Sidebar from '../components/sidebar/Sidebar';
 import BlogItem from '../components/blogItem/BlogItem';
 import { ItemWrapper, StyledContainer, Main, Articles } from './App.styles';
+import { useRouter } from 'next/router';
 
-const POSTS_QUERY = gql`
-  query POSTS_QUERY {
-    posts {
+const USERS_POSTS_QUERY = gql`
+  query USERS_POSTS_QUERY {
+    users{
       data{
-        user {
-          name
-          email
-          username
-          id
-        }
-        title
-        body
+        name
+        username
+        email
         id
-        comments {
-          data{
+        posts {
+          data {
+            title
             id
-            name
             body
+            comments {
+              data {
+                body 
+                name
+                id
+              }
+            }
           }
         }
       }
@@ -34,8 +38,41 @@ const POSTS_QUERY = gql`
   }
 `;
 
+const SINGLE_USER_QUERY = gql`
+  query SINGLE_USER_QUERY($id: ID!) {
+    user(id: $id) {
+        name
+        username
+        email
+        id
+        posts {
+          data {
+            title
+            id
+            body
+            comments {
+              data {
+                body 
+                name
+                id
+              }
+            }
+          }
+        }
+    }
+  }
+`;
+
 const Home: NextPage = () => {
-  const { data, error, loading } = useQuery<{posts?: IPostsBlogListResponse}>(POSTS_QUERY);
+  const { query } = useRouter();
+  const id = query?.user;
+  const Query = id ? SINGLE_USER_QUERY : USERS_POSTS_QUERY;
+  const QUERY_OPTIONS = {
+    variables: {
+      id
+    }
+  }
+  const { data, error, loading } = useQuery<{users?: UserPostsResponse} & {user?: UserResponse}>(Query, QUERY_OPTIONS);
   
   if(loading) return <p>Loading...</p>
   if(error) return <p>{`error: ${error}`}</p>
@@ -53,9 +90,13 @@ const Home: NextPage = () => {
         <Sidebar />
         <Main>
           <Articles>
-            {data?.posts?.data?.map((post) => (
+            {data?.users?.data ? data.users.data.map((user) => user.posts.data.map((post) => (
               <ItemWrapper key={post.id}>
-                <BlogItem post={post} />
+                <BlogItem username={user.name} post={post} />
+              </ItemWrapper>
+            ))) : data?.user?.posts.data.map((post) => (
+              <ItemWrapper key={post.id}>
+                <BlogItem username={data?.user?.name ? data?.user?.name : ''} post={post} />
               </ItemWrapper>
             ))}
           </Articles>

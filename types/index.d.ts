@@ -2,6 +2,9 @@ interface IPost {
   title: string;
   id: string;
   body: string;
+  comments: {
+    data: Array<IComment>
+  }
 }
 
 interface IUser {
@@ -17,17 +20,16 @@ interface IComment {
   id: string;
 }
 
-interface PostResponse extends IPost {
-  user: IUser;
-  comments: {
-    data: Array<IComment>
-  }
-}
-
-interface UserResponse {
+interface AllUserResponse {
   data: Array<IUser>;
 }
 
-interface IPostsBlogListResponse {
-  data: Array<PostResponse>;
+interface UserResponse extends IUser {
+  posts: {
+    data: Array<IPost>;
+  }
+}
+
+interface UserPostsResponse {
+  data: Array<UserResponse>;
 }

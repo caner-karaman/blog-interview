@@ -23,7 +23,7 @@ const USERS_QUERY = gql`
 const Sidebar: FC = () => {
   const [search, setSearch] = useState('')
   const { query } = useRouter();
-  const { data, error, loading } = useQuery<{users?: UserResponse}>(USERS_QUERY);
+  const { data, error, loading } = useQuery<{users?: AllUserResponse}>(USERS_QUERY);
 
   if(loading) return <p>Loading...</p>
   if(error) return <p>{`error: ${error}`}</p>
@@ -36,6 +36,11 @@ const Sidebar: FC = () => {
       </SearchWrapper>
       <SideBarTitle>Users</SideBarTitle>
       <UserListWrapper>
+        <UserListItem>
+          <Link href={{ pathname: '/' }}>
+            <UserListItemText isActive={!query?.user}>All User</UserListItemText>
+          </Link>
+        </UserListItem>
         {data?.users?.data?.filter((user) => user.name.includes(search)).map((user) => (
           <UserListItem key={user.id}>
             <Link href={{ pathname: '/', query: { user: user.id } }}>
