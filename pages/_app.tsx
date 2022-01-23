@@ -1,21 +1,12 @@
 import '../styles/globals.css'
 import { ThemeProvider } from 'styled-components';
-import type { AppProps } from 'next/app'
 import { theme } from '../common/theme';
-import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client';
+import withData from "../lib/withApollo";
 
-export const link = createHttpLink({
-  uri: "https://graphqlzero.almansi.me/api"
-});
-
-export const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  link,
-});
-
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, apollo }: any) {
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={apollo}>
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
       </ThemeProvider>
@@ -23,4 +14,15 @@ function MyApp({ Component, pageProps }: AppProps) {
   )
 }
 
-export default MyApp
+MyApp.getInitialProps = async function ({ Component, ctx }: any) {
+  let pageProps = {
+    query: undefined
+  };
+  if (Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx);
+  }
+  pageProps.query = ctx.query;
+  return { pageProps };
+};
+
+export default withData(MyApp);
