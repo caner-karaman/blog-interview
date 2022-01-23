@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+  height: 200px;
+  overflow-y: scroll;
+`;
 
 export const Header = styled.header`
   display: flex;
