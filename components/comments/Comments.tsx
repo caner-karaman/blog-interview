@@ -19,14 +19,12 @@ const Comments: FC<CommentsProps> = ({comments}) => {
       </Header>
       {
         comments.map((comment, index) => (
-          <>
-            {(isShow || index === 0) && (
-              <CommentItemWrapper key={comment.id}>
-                <CommentName>{comment.name}</CommentName>
-                <Body>{comment.body}</Body>
-              </CommentItemWrapper>
-            )}
-          </>
+          (isShow || index === 0) ? (
+            <CommentItemWrapper key={comment.id}>
+              <CommentName>{comment.name}</CommentName>
+              <Body>{comment.body}</Body>
+            </CommentItemWrapper>
+          ) : null
         ))
       }
     </Wrapper>

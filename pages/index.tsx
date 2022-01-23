@@ -1,15 +1,47 @@
 /* eslint-disable @next/next/google-font-display */
 /* eslint-disable @next/next/no-page-custom-font */
 import type { NextPage } from 'next';
+import { gql } from 'graphql-tag';
+import { useQuery } from '@apollo/client';
 import Head from 'next/head';
 import Header from "../components/header/Header";
-import Sidebar from '../components/sidebar/SideBar';
+import Sidebar from '../components/sidebar/Sidebar';
 import BlogItem from '../components/blogItem/BlogItem';
 import { ItemWrapper, StyledContainer, Main, Articles } from './App.styles';
 import { createPosts } from '../types/mockData';
 
 const posts = createPosts();
+
+const POSTS_QUERY = gql`
+  query POSTS_QUERY {
+    posts {
+      data{
+        user {
+          name
+          email
+          username
+          id
+        }
+        title
+        body
+        id
+        comments {
+          data{
+            id
+            name
+            body
+          }
+        }
+      }
+    }
+  }
+`;
+
 const Home: NextPage = () => {
+  const { data, error, loading } = useQuery<{posts?: IPostsBlogListResponse}>(POSTS_QUERY);
+  
+  if(loading) return <p>Loading...</p>
+  if(error) return <p>{`error: ${error}`}</p>
 
   return (
     <div>
@@ -24,12 +56,7 @@ const Home: NextPage = () => {
         <Sidebar />
         <Main>
           <Articles>
-            {posts.map((post) => (
-              <ItemWrapper key={post.id}>
-                <BlogItem post={post} />
-              </ItemWrapper>
-            ))}
-            {posts.reverse().map((post) => (
+            {data?.posts?.data?.map((post) => (
               <ItemWrapper key={post.id}>
                 <BlogItem post={post} />
               </ItemWrapper>
