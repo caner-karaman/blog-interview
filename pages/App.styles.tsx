@@ -3,7 +3,7 @@ import Container from '../components/container/Container';
 
 export const StyledContainer = styled(Container)`
   display: grid;
-  grid-column-gap: 20px;
+  grid-column-gap: 50px;
 `
 
 export const Main = styled.main`

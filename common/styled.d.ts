@@ -2,6 +2,7 @@ import 'styled-components';
 
 interface IColor {
   primary: string;
+  secondary: string;
   white: string;
   black: string;
   lightGray: string;
@@ -12,6 +13,5 @@ interface IColor {
 declare module 'styled-components' {
   export interface DefaultTheme {
     color: IColor;
-
   }
 }
