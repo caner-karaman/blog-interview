@@ -1,13 +1,20 @@
 import React, {FC} from 'react';
+import { BlogTitle, Paragraph, UserName, Wrapper } from './BlogItem.styles';
 
 interface BlogItemProps {
-  post: IPost;
+  post: PostResponse;
 }
 
 const BlogItem: FC<BlogItemProps> = ({post}) => {
+  const {user, body, title, comments} = post;
+
   return (
-    <div>
-    </div>
+    <Wrapper>
+      <UserName>{user.username}</UserName>
+      <BlogTitle>{title}</BlogTitle>
+      <Paragraph>{body}</Paragraph>
+      <hr />
+    </Wrapper>
   )
 }
 

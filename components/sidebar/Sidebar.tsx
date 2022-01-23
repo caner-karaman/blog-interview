@@ -9,8 +9,6 @@ import { useRouter } from "next/router";
 const users = createUsers();
 const Sidebar = () => {
   const { query } = useRouter();
-  console.log('icerde');
-  console.log(query);
 
   return (
     <Wrapper>

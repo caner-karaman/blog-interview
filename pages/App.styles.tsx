@@ -9,6 +9,15 @@ export const StyledContainer = styled(Container)`
 export const Main = styled.main`
   grid-column-start: 3;
   grid-column-end: 12;
-  background-color: lightgray;
-  height: 200px;
+`
+
+export const Articles = styled.div`
+  display: flex;
+  justify-content: space-around;
+  padding-top: 35px;
+  flex-wrap: wrap;
+`;
+
+export const ItemWrapper = styled.div`
+  margin: 10px 0;
 `

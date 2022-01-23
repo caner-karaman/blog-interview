@@ -1,16 +1,15 @@
 /* eslint-disable @next/next/google-font-display */
 /* eslint-disable @next/next/no-page-custom-font */
-
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useState } from 'react';
 import Header from "../components/header/Header";
 import Sidebar from '../components/sidebar/SideBar';
-import { StyledContainer, Main } from './App.styles';
+import BlogItem from '../components/blogItem/BlogItem';
+import { ItemWrapper, StyledContainer, Main, Articles } from './App.styles';
+import { createPosts } from '../types/mockData';
 
-
+const posts = createPosts();
 const Home: NextPage = () => {
-  const [search, setSearch] = useState('');
 
   return (
     <div>
@@ -23,7 +22,20 @@ const Home: NextPage = () => {
       <Header></Header>
       <StyledContainer>
         <Sidebar />
-        <Main />
+        <Main>
+          <Articles>
+            {posts.map((post) => (
+              <ItemWrapper key={post.id}>
+                <BlogItem post={post} />
+              </ItemWrapper>
+            ))}
+            {posts.reverse().map((post) => (
+              <ItemWrapper key={post.id}>
+                <BlogItem post={post} />
+              </ItemWrapper>
+            ))}
+          </Articles>
+        </Main>
       </StyledContainer>
     </div>
   )
