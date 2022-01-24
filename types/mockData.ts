@@ -59,8 +59,7 @@ const createComments = () => {
 
 
 // ***--- Post ---***
-const post: PostResponse = {
-  user: createUser({}),
+const post: IPost = {
   title: 'İklim Değişikliği Yazı Dizisi 3 | İklim Değişikliğine İlişkin Uluslararası',
   id: '1',
   body: "İklim değişikliği yazı dizimiz kapsamında bir önceki makalemizde de belirtmiş olduğumuz üzere, Birleşmiş Milletler İklim Değişikliği Çerçeve Sözleşmesi",
@@ -69,8 +68,7 @@ const post: PostResponse = {
   }
 }
 
-const post2: PostResponse = {
-  user: createUser(user2),
+const post2: IPost = {
   title: 'İklim Değişikliğine İlişkin Uluslararası',
   id: '2',
   body: "Belirtmiş olduğumuz üzere, Birleşmiş Milletler İklim Değişikliği Çerçeve Sözleşmesi",
@@ -79,18 +77,8 @@ const post2: PostResponse = {
   }
 }
 
-const createPost = ({
-  user= createUser({}),
-  title= 'İklim Değişikliği Yazı Dizisi 3 | İklim Değişikliğine İlişkin Uluslararası',
-  id= '1',
-  body= "İklim değişikliği yazı dizimiz kapsamında bir önceki makalemizde de belirtmiş olduğumuz üzere, Birleşmiş Milletler İklim Değişikliği Çerçeve Sözleşmesi",
-  comments= {
-    data: createComments(),
-  }
-}) => {
-  return {
-    user, title, id, body, comments
-  }
+const createPost = () => {
+  return post;
 }
 
 const createPosts = () => {
