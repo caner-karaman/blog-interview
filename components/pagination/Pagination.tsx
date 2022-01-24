@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 interface PaginationProps {
   page: string;
-  pageCount: string;
+  pageCount: number;
 }
 
 const Pagination: FC<PaginationProps> = ({page, pageCount}) => {

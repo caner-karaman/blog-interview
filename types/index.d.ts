@@ -5,6 +5,9 @@ interface IPost {
   comments: {
     data: Array<IComment>
   }
+  user?: {
+    name?: string;
+  }
 }
 
 interface IUser {
@@ -27,9 +30,15 @@ interface AllUserResponse {
 interface UserResponse extends IUser {
   posts: {
     data: Array<IPost>;
+    meta: {
+      totalCount: number;
+    }
   }
 }
 
-interface UserPostsResponse {
-  data: Array<UserResponse>;
+interface AllPostsResponse {
+  data: Array<IPost>;
+  meta: {
+    totalCount: number;
+  }
 }
