@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from "../../common/theme";
 
 export const Wrapper = styled.div`
   width: 345px;
@@ -6,6 +7,10 @@ export const Wrapper = styled.div`
   border-radius: 5px;
   padding: 7px 15px 10px;
   height: 100%;
+
+  @media ${device.desktop} { 
+    width: 275px;
+  }
 `;
 
 export const UserName = styled.span`

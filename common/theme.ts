@@ -13,4 +13,16 @@ const theme: DefaultTheme = {
   }
 }
 
-export {theme}
+const sizes = {
+  SMALL_SCREEN: '1025px',
+  TABLET: '769px',
+  MOBILE: '600px',
+}
+
+const device = {
+  desktop: `(max-width: ${sizes.SMALL_SCREEN})`,
+  tablet: `(max-width: ${sizes.TABLET})`,
+  mobile: `(max-width: ${sizes.MOBILE})`,
+}
+
+export {theme, device};

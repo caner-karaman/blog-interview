@@ -6,7 +6,6 @@ import Input from "../input/Input";
 import { useRouter } from "next/router";
 import { gql, useQuery } from '@apollo/client';
 
-
 const USERS_QUERY = gql`
   query POSTS_QUERY {
     users {

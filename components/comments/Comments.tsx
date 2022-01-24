@@ -15,7 +15,7 @@ const Comments: FC<CommentsProps> = ({comments}) => {
   return (
     <Wrapper>
       <Header>
-        <CommentButton onClick={handleClick}>All Comments</CommentButton>
+        <CommentButton onClick={handleClick}>{isShow ? 'Hide' : 'All'} Comments</CommentButton>
       </Header>
       {
         comments.map((comment, index) => (

@@ -1,10 +1,16 @@
 import styled from 'styled-components';
+import { device } from "../../common/theme";
 
 export const Wrapper = styled.aside`
   grid-column-start: 1;
   grid-column-end: 3;
   padding-top: 22px;
   min-width: 210px;
+
+
+  @media ${device.desktop} { 
+    min-width: 150px;
+  }
 `;
 
 export const SideBarTitle = styled.h3`
