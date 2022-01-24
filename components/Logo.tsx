@@ -3,12 +3,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import Head from 'next/head';
+import { device } from '../common/theme';
 
 const LogoWrapper = styled.div`
   padding: 10px 15px;
   width: 246px;
   transform: skew(-15deg, 0);
   background-color: ${({theme}) => theme.color.primary};
+
+  @media ${device.mobile} { 
+    width: 220px;
+    margin-left: 10px;
+  }
 `;
 
 const Heading = styled.h1`
@@ -16,6 +22,10 @@ const Heading = styled.h1`
   font-family: 'Macondo Swash Caps', serif;
   font-size: 32px;
   color: ${({theme}) => theme.color.white};
+
+  @media ${device.mobile} { 
+    font-size: 28px;
+  }
 `
 
 const Logo = () => {
@@ -28,7 +38,6 @@ const Logo = () => {
         <Heading>Viable Ventures</Heading>
       </LogoWrapper>
     </>
-
   )
 }
 

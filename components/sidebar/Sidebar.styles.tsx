@@ -22,10 +22,18 @@ export const SideBarTitle = styled.h3`
   border-bottom: 1px solid ${({theme}) => theme.color.primary};
   margin-top: 0;
   margin-bottom: 30px;
+
+  @media ${device.mobile} { 
+    margin-bottom: 10px;
+  }
 `
 
 export const SearchWrapper = styled.div`
   margin-bottom: 50px;
+
+  @media ${device.mobile} { 
+    margin-bottom: 30px;
+  }
 `
 
 export const UserListWrapper = styled.ul`

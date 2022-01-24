@@ -1,6 +1,5 @@
-import React from 'react';
 import styled from 'styled-components';
-import BlogBG from "../../public/blogBg.jpg";
+import { device } from "../../common/theme";
 
 export const StyledHeader = styled.header`
   width: 100%;
@@ -13,6 +12,10 @@ export const HeaderContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media ${device.desktop} { 
+    height: 180px;
+  }
 `
 
 export const Heading2 = styled.h2`

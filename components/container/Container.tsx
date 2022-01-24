@@ -10,6 +10,10 @@ const Container = styled.div`
     width: 100%;
     padding: 0 30px;
   }
+
+  @media ${device.mobile} { 
+    padding: 0 10px;
+  }
 `;
 
 export default Container;

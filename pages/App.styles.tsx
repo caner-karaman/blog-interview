@@ -1,9 +1,14 @@
 import styled from 'styled-components';
 import Container from '../components/container/Container';
+import { device } from '../common/theme';
 
 export const StyledContainer = styled(Container)`
   display: grid;
   grid-column-gap: 50px;
+
+  @media ${device.mobile} { 
+    display: block;
+  }
 `
 
 export const Main = styled.main`
