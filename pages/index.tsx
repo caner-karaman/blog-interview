@@ -8,7 +8,7 @@ import Head from 'next/head';
 import Header from "../components/header/Header";
 import Sidebar from '../components/sidebar/Sidebar';
 import BlogItem from '../components/blogItem/BlogItem';
-import { ItemWrapper, StyledContainer, Main, Articles, FilterWrapper } from './App.styles';
+import { ItemWrapper, StyledContainer, Main, Articles, FilterWrapper } from '../styles/App.styles';
 import { useRouter } from 'next/router';
 import Pagination from '../components/pagination/Pagination';
 import Sorting from '../components/sort/Sorting';
