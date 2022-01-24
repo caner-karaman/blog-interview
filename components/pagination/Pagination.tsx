@@ -15,13 +15,13 @@ const Pagination: FC<PaginationProps> = ({page, pageCount}) => {
 
   return(
     <Wrapper>
-      <PrevButton isDisabled={+page <= 1} aria-disabled={+page <= 1}>
+      <PrevButton data-testid="prevButton" isDisabled={+page <= 1} aria-disabled={+page <= 1}>
         <Link href={{ pathname: '/', query: { user: id, page: +page-1, ...(sort && {sort})  } }}>
           ← Prev
         </Link>
       </PrevButton>
       <DisplayPage>{page} of {pageCount}</DisplayPage>
-      <NextButton isDisabled={+page >= pageCount} aria-disabled={+page >= pageCount}>
+      <NextButton data-testid="nextButton" isDisabled={+page >= pageCount} aria-disabled={+page >= pageCount}>
         <Link href={{ pathname: '/', query: { user: id, page: +page+1, ...(sort && {sort})  } }}>
           Next →
         </Link>

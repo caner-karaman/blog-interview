@@ -1,14 +1,14 @@
 import Input from "../components/input/Input";
-import { render, screen } from '@testing-library/react';
+import { render, screen } from './test-utils';
 import userEvent from '@testing-library/user-event';
 
 describe('<Input/>', () => {
   it('Renders Placeholder', () => {
-    const { container } = render(<Input value="Sea" placeholder="Search" onChange={() => null} />);  
-    expect(screen.getByText('Search')).toBeInTheDocument();
+    render(<Input value="Sea" placeholder="Search" onChange={() => null} />);  
+    expect(screen.getByPlaceholderText('Search'));
   });
   it('Handles Typing Update', async () => {
-    const { container } = render(<Input placeholder="Search" />);  
+    render(<Input placeholder="Search" />);  
     const text = "Caner";
     const input = screen.getByTestId("input");
 
@@ -21,7 +21,7 @@ describe('<Input/>', () => {
   });
   it('How Many Times Function Called', async () => {
     const typing = jest.fn();
-    const { container } = render(<Input placeholder="Search" onChange={typing} />);  
+    render(<Input placeholder="Search" onChange={typing} />);  
     const input = screen.getByTestId("input");
     await userEvent.type(
       input,
