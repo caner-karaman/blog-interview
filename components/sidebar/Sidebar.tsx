@@ -31,7 +31,7 @@ const Sidebar: FC = () => {
   return (
     <Wrapper>
       <SearchWrapper>
-        <SideBarTitle>Search Blogs</SideBarTitle>
+        <SideBarTitle>Search Users</SideBarTitle>
         <Input onChange={(text) => setSearch(text)} value={search} placeholder='Search' />
       </SearchWrapper>
       <SideBarTitle>Users</SideBarTitle>
