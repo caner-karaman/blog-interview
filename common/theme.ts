@@ -25,4 +25,4 @@ const device = {
   mobile: `(max-width: ${sizes.MOBILE})`,
 }
 
-export {theme, device};
+export {theme, device, sizes};

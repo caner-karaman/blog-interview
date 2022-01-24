@@ -31,4 +31,5 @@ export const FilterWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 20px 0;
+  width: 100%;
 `;

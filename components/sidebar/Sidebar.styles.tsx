@@ -5,11 +5,11 @@ export const Wrapper = styled.aside`
   grid-column-start: 1;
   grid-column-end: 3;
   padding-top: 22px;
-  min-width: 210px;
+  width: 210px;
 
 
   @media ${device.desktop} { 
-    min-width: 150px;
+    width: 150px;
   }
 `;
 

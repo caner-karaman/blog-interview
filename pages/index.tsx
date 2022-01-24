@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/google-font-display */
 /* eslint-disable @next/next/no-page-custom-font */
-import React, {useEffect} from 'react';
+import React from 'react';
 import type { NextPage } from 'next';
 import { gql } from 'graphql-tag';
 import { useQuery } from '@apollo/client';
@@ -12,6 +12,8 @@ import { ItemWrapper, StyledContainer, Main, Articles, FilterWrapper } from './A
 import { useRouter } from 'next/router';
 import Pagination from '../components/pagination/Pagination';
 import Sorting from '../components/sort/Sorting';
+import ContentLoader from 'react-content-loader';
+import useWindowDimensions from '../common/useWindowDimension';
 
 const ALL_POSTS_QUERY = gql`
   query ALL_POSTS_QUERY($page: Int!, $sort: SortOrderEnum) {
@@ -86,6 +88,7 @@ const Home: NextPage = () => {
   const id = query?.user;
   const page = query?.page as string || '1';
   const Query = id ? SINGLE_USER_QUERY : ALL_POSTS_QUERY;
+  const { width } = useWindowDimensions();
   const QUERY_OPTIONS = {
     variables: {
       id,
@@ -95,8 +98,9 @@ const Home: NextPage = () => {
   }
   const { data, error, loading } = useQuery<{posts?: AllPostsResponse} & {user?: UserResponse}>(Query, QUERY_OPTIONS);
   const pageCount = Math.ceil(data?.user?.posts?.meta?.totalCount ? data?.user?.posts?.meta?.totalCount/4 : data?.posts?.meta?.totalCount ? data?.posts?.meta?.totalCount/4 : 1 );
+  const controlledWidth = width || 0;
+  const loaderWidth = controlledWidth > 1025 ? 320 : '100%';
 
-  if(loading) return <p>Loading...</p>
   if(error) return <p>{`error: ${error}`}</p>
 
   return (
@@ -112,19 +116,56 @@ const Home: NextPage = () => {
         <Sidebar />
         <Main>
           <FilterWrapper>
-            <Pagination pageCount={pageCount} page={page}></Pagination>
+          {loading ? (<ContentLoader
+                    speed={2}
+                    width={220}
+                    height={40}
+                    backgroundColor="#d9d9d9"
+                    foregroundColor="#ededed"
+                  >
+                    <rect x="0" y="6" rx="4" ry="4" width="220" height="40" />
+                  </ContentLoader>)  : <Pagination pageCount={pageCount} page={page}></Pagination>}
             <Sorting />
           </FilterWrapper>
           <Articles>
-            {data?.posts?.data ? data?.posts?.data?.map((post) => (
-              <ItemWrapper key={post.id}>
-                <BlogItem username={post?.user?.name || ''} post={post} />
-              </ItemWrapper>
-            )) : data?.user?.posts.data.map((post) => (
-              <ItemWrapper key={post.id}>
-                <BlogItem username={data?.user?.name ? data?.user?.name : ''} post={post} />
-              </ItemWrapper>
-            ))}
+            {loading ? (
+              <>
+                <ItemWrapper>
+                  <ContentLoader
+                    speed={2}
+                    width={loaderWidth}
+                    height={200}
+                    backgroundColor="#d9d9d9"
+                    foregroundColor="#ededed"
+                  >
+                    <rect x="0" y="6" rx="4" ry="4" width="100%" height="200" />
+                  </ContentLoader>
+                </ItemWrapper>
+                <ItemWrapper>
+                  <ContentLoader
+                    speed={2}
+                    width={loaderWidth}
+                    height={200}
+                    backgroundColor="#d9d9d9"
+                    foregroundColor="#ededed"
+                  >
+                    <rect x="0" y="6" rx="4" ry="4" width="100%" height="200" />
+                  </ContentLoader>
+                </ItemWrapper>
+              </>
+            ) : (
+              <>
+                {data?.posts?.data ? data?.posts?.data?.map((post) => (
+                  <ItemWrapper key={post.id}>
+                    <BlogItem username={post?.user?.name || ''} post={post} />
+                  </ItemWrapper>
+                )) : data?.user?.posts.data.map((post) => (
+                  <ItemWrapper key={post.id}>
+                    <BlogItem username={data?.user?.name ? data?.user?.name : ''} post={post} />
+                  </ItemWrapper>
+                ))}  
+              </>
+            )}
           </Articles>
         </Main>
       </StyledContainer>
