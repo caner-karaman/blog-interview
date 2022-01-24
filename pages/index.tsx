@@ -8,8 +8,9 @@ import Head from 'next/head';
 import Header from "../components/header/Header";
 import Sidebar from '../components/sidebar/Sidebar';
 import BlogItem from '../components/blogItem/BlogItem';
-import { ItemWrapper, StyledContainer, Main, Articles } from './App.styles';
+import { ItemWrapper, StyledContainer, Main, Articles, FilterWrapper } from './App.styles';
 import { useRouter } from 'next/router';
+import Pagination from '../components/pagination/Pagination';
 
 const USERS_POSTS_QUERY = gql`
   query USERS_POSTS_QUERY {
@@ -66,6 +67,7 @@ const SINGLE_USER_QUERY = gql`
 const Home: NextPage = () => {
   const { query } = useRouter();
   const id = query?.user;
+  const page = query?.page;
   const Query = id ? SINGLE_USER_QUERY : USERS_POSTS_QUERY;
   const QUERY_OPTIONS = {
     variables: {
@@ -89,6 +91,9 @@ const Home: NextPage = () => {
       <StyledContainer>
         <Sidebar />
         <Main>
+          <FilterWrapper>
+            <Pagination pageCount={'10'} page={page || '1'}></Pagination>
+          </FilterWrapper>
           <Articles>
             {data?.users?.data ? data.users.data.map((user) => user.posts.data.map((post) => (
               <ItemWrapper key={post.id}>

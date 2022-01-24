@@ -14,10 +14,15 @@ export const Main = styled.main`
 export const Articles = styled.div`
   display: flex;
   justify-content: space-around;
-  padding-top: 35px;
   flex-wrap: wrap;
 `;
 
 export const ItemWrapper = styled.div`
   margin: 10px 0;
 `
+
+export const FilterWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+`;
