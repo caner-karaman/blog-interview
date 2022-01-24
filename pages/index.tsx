@@ -11,13 +11,18 @@ import BlogItem from '../components/blogItem/BlogItem';
 import { ItemWrapper, StyledContainer, Main, Articles, FilterWrapper } from './App.styles';
 import { useRouter } from 'next/router';
 import Pagination from '../components/pagination/Pagination';
+import Sorting from '../components/sort/Sorting';
 
 const ALL_POSTS_QUERY = gql`
-  query ALL_POSTS_QUERY($page: Int!) {
+  query ALL_POSTS_QUERY($page: Int!, $sort: SortOrderEnum) {
     posts(options: {
     paginate: {
       page: $page
       limit: 4
+    }
+    sort: {
+      order: $sort
+      field: "title"
     }
   }) {
     data {
@@ -40,7 +45,7 @@ const ALL_POSTS_QUERY = gql`
 `;
 
 const SINGLE_USER_QUERY = gql`
-  query SINGLE_USER_QUERY($id: ID!, $page: Int!) {
+  query SINGLE_USER_QUERY($id: ID!, $page: Int!, $sort: SortOrderEnum) {
     user(id: $id) {
         name
         username
@@ -50,6 +55,10 @@ const SINGLE_USER_QUERY = gql`
           paginate: {
             page: $page
             limit: 4
+          }
+          sort: {
+            order: $sort
+            field: "title"
           }
         }) {
           data {
@@ -81,6 +90,7 @@ const Home: NextPage = () => {
     variables: {
       id,
       page: +page,
+      sort: query?.sort,
     }
   }
   const { data, error, loading } = useQuery<{posts?: AllPostsResponse} & {user?: UserResponse}>(Query, QUERY_OPTIONS);
@@ -103,6 +113,7 @@ const Home: NextPage = () => {
         <Main>
           <FilterWrapper>
             <Pagination pageCount={pageCount} page={page}></Pagination>
+            <Sorting />
           </FilterWrapper>
           <Articles>
             {data?.posts?.data ? data?.posts?.data?.map((post) => (

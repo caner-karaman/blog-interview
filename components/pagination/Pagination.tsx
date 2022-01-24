@@ -11,17 +11,18 @@ interface PaginationProps {
 const Pagination: FC<PaginationProps> = ({page, pageCount}) => {
   const { query } = useRouter();
   const id = query?.user;
+  const sort = query?.sort;
 
   return(
     <Wrapper>
       <PrevButton isDisabled={+page <= 1} aria-disabled={+page <= 1}>
-        <Link href={{ pathname: '/', query: { user: id, page: +page-1  } }}>
+        <Link href={{ pathname: '/', query: { user: id, page: +page-1, sort  } }}>
           ← Prev
         </Link>
       </PrevButton>
       <DisplayPage>{page} of {pageCount}</DisplayPage>
       <NextButton isDisabled={+page >= pageCount} aria-disabled={+page >= pageCount}>
-        <Link href={{ pathname: '/', query: { user: id, page: +page+1  } }}>
+        <Link href={{ pathname: '/', query: { user: id, page: +page+1, sort  } }}>
           Next →
         </Link>
       </NextButton>
