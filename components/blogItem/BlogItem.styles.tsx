@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
   height: 100%;
 
   @media ${device.desktop} { 
-    width: 275px;
+    width: 100%;
   }
 `;
 

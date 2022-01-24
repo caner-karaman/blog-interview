@@ -1,8 +1,14 @@
 import styled from 'styled-components';
+import { device } from "../../common/theme";
 
 export const Wrapper = styled.div`
   height: 200px;
   overflow-y: scroll;
+
+
+  @media ${device.desktop} { 
+    height: 130px;
+  }
 `;
 
 export const Header = styled.header`
