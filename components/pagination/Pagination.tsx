@@ -20,7 +20,7 @@ const Pagination: FC<PaginationProps> = ({page, pageCount}) => {
           ← Prev
         </Link>
       </PrevButton>
-      <DisplayPage>{page} of {pageCount}</DisplayPage>
+      <DisplayPage data-cy="displayPage">{page} of {pageCount}</DisplayPage>
       <NextButton data-testid="nextButton" isDisabled={+page >= pageCount} aria-disabled={+page >= pageCount}>
         <Link href={{ pathname: '/', query: { user: id, page: +page+1, ...(sort && {sort})  } }}>
           Next →

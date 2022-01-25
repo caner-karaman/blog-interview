@@ -11,10 +11,10 @@ const BlogItem: FC<BlogItemProps> = ({post, username}) => {
   const {body, title, comments} = post;
 
   return (
-    <Wrapper>
-      <UserName>{username}</UserName>
-      <BlogTitle>{title}</BlogTitle>
-      <Paragraph>{body}</Paragraph>
+    <Wrapper data-cy="blogItem">
+      <UserName data-cy="blogItemUser">{username}</UserName>
+      <BlogTitle data-cy="blogItem title">{title}</BlogTitle>
+      <Paragraph data-cy="blogItem body">{body}</Paragraph>
       <hr />
       <Comments comments={comments.data}/>
     </Wrapper>

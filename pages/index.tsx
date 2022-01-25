@@ -31,6 +31,9 @@ const ALL_POSTS_QUERY = gql`
       id
       title
       body
+      user {
+        name
+      }
       comments {
         data {
           id

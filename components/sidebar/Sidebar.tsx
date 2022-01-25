@@ -31,7 +31,7 @@ const Sidebar: FC = () => {
     <Wrapper>
       <SearchWrapper>
         <SideBarTitle>Search Users</SideBarTitle>
-        <Input onChange={(text) => setSearch(text)} value={search} placeholder='Search' />
+        <Input data-cy="userSearch" onChange={(text) => setSearch(text)} value={search} placeholder='Search' />
       </SearchWrapper>
       <SideBarTitle>Users</SideBarTitle>
       <UserListWrapper>
@@ -41,7 +41,7 @@ const Sidebar: FC = () => {
           </Link>
         </UserListItem>
         {data?.users?.data?.filter((user) => user.name.includes(search)).map((user) => (
-          <UserListItem key={user.id}>
+          <UserListItem data-cy="user" key={user.id}>
             <Link href={{ pathname: '/', query: { user: user.id, page: 1 } }}>
               <UserListItemText isActive={user.id === query?.user}>{user.name}</UserListItemText>
             </Link>
